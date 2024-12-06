@@ -5,15 +5,13 @@ import creation from "./createCalendar";
 
 export default function App() {
     const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
 
     const [date, setDate] = useState(new Date);
-    const [currentDate, setCurrentDate] = useState(getDate(date));
-    console.log(date);
 
 
     function getDate(today) {
-        console.log(today);
         const realmonth = today.getMonth()+1;
         const realyear = today.getFullYear();
         const date = today. getDate();
@@ -29,12 +27,13 @@ export default function App() {
         setDate(new Date(date.getFullYear(), date.getMonth()+2, 0));
     }
 
-    useEffect(() => {
-        setCurrentDate(getDate(date))
-    }), currentDate;
 
     const layout = (date) => {
         return creation(date);;
+    }
+
+    const getMonthYear = (date) => {
+        return months[date.getMonth()] + ", " + date.getFullYear()
     }
 
 
@@ -43,24 +42,39 @@ export default function App() {
 
     return (
         <main>
-            <div>{currentDate}</div>
-            <div className = "flex gap-2">
-                <button type = "button" className = "w-8 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 disabled:bg-gray-400 focus:ring-blue-400 focus:ring-opacity-75" onClick = {decreaseDate}>-</button>
-                <button type = "button" className = "w-8 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400  disabled:bg-gray-400 focus:ring-opacity-75 ml-1" onClick = {increaseDate}>+</button>
+            <h1 className = "text-center text-4xl mt-4">{getMonthYear(date)}</h1>
+            <div className = "flex gap-32 justify-center mt-4">
+                <button type = "button" className = "w-8 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 disabled:bg-gray-400 focus:ring-blue-400 focus:ring-opacity-75" onClick = {decreaseDate}>←</button>
+                <button type = "button" className = "w-8 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400  disabled:bg-gray-400 focus:ring-opacity-75 ml-1" onClick = {increaseDate}>→</button>
             </div>
-            <ul className = "grid grid-cols-7 ml-4 justify-items-center">
-                <li className = "text-center mb-4">Sunday</li>
-                <li className = "text-center">Monday</li>
-                <li className = "text-center">Tuesday</li>
-                <li className = "text-center">Wednsday</li>
-                <li className = "text-center">Thursda</li>
-                <li className = "text-center">Friday</li>
-                <li className = "text-center">Saturday</li>
+            <ul className = "grid grid-cols-7 w-[1000px] mt-4 mb-12 m-auto justify-items-center">
+                <li className = "">Sunday</li>
+                <li className = "">Monday</li>
+                <li className = "">Tuesday</li>
+                <li className = "">Wednsday</li>
+                <li className = "">Thursday</li>
+                <li className = "">Friday</li>
+                <li className = "">Saturday</li>
                 {layout(date).map(data => (
                     <li key = {data[0]}>
-                        <div className = "box-border h-48 w-48 border-2 border-white text-center mb-12">
-                            <p>{data[2]} {data[0]}</p>
+                    {data[1] === "inactive" ? (
+                        <div className = "box-border h-48 w-48 border-2 border-gray-500 text-center cursor-pointer hover:bg-blue-700">
+                            <p className = "text-left ml-1 mt-1">{data[2]}</p>
                         </div>
+                    ) :
+
+                    (data[3] === "today" ? (
+                        <div className = "box-border h-48 w-48 border-2 border-white text-center bg-blue-500 cursor-pointer hover:bg-blue-700">
+                            <p className = "text-left ml-1 mt-1">{data[2]}</p>
+                        </div>
+                    ) : 
+                    
+                    (
+                        <div className = "box-border h-48 w-48 border-2 border-white text-center cursor-pointer hover:bg-blue-700">
+                            <p className = "text-left ml-1 mt-1">{data[2]}</p>
+                        </div>
+                    )
+                    )}
                     </li>
                 ))}
             </ul>

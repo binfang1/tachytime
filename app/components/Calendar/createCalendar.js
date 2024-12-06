@@ -4,8 +4,7 @@ export default function creation(date) {
     const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
     let year = date.getFullYear();
     let month = date.getMonth();
-    console.log(year);
-    console.log(month);
+    let today = new Date;
 
 
     // Get the first day of the month
@@ -33,19 +32,20 @@ export default function creation(date) {
             temp = month - 1;
         }
         console.log(temp)
-        lit.push([(months[temp] + (monthlastdate - i + 1)), "inactive", (monthlastdate - i + 1)]);
+        lit.push([(months[temp] + (monthlastdate - i + 1)), "inactive", (monthlastdate - i + 1), ""]);
     }
 
     // Loop to add the dates of the current month
     for (let i = 1; i <= lastdate; i++) {
+        
 
         // Check if the current date is today
-        let isToday = i === date.getDate()
+        let isToday = i === today.getDate()
             && month === new Date().getMonth()
             && year === new Date().getFullYear()
-            ? "active"
+            ? "today"
             : "";
-        lit.push([(months[month] + i), "active", (i)]);
+        lit.push([(months[month] + i), "active", (i), isToday]);
     }
 
     // Loop to add the first dates of the next month
@@ -57,7 +57,7 @@ export default function creation(date) {
         else {
             temp = month + 1;
         }
-        lit.push([(months[temp] + (i - dayend + 1)), "inactive", (i - dayend + 1)]);
+        lit.push([(months[temp] + (i - dayend + 1)), "inactive", (i - dayend + 1), ""]);
     }
 
     return lit;
