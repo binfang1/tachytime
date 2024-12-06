@@ -32,7 +32,7 @@ export default function creation(date) {
             temp = month - 1;
         }
         console.log(temp)
-        lit.push([(months[temp] + (monthlastdate - i + 1)), "inactive", (monthlastdate - i + 1), ""]);
+        lit.push([(months[temp] + " " + String(monthlastdate - i + 1) + " " + year), "inactive", (monthlastdate - i + 1), ""]);
     }
 
     // Loop to add the dates of the current month
@@ -45,7 +45,7 @@ export default function creation(date) {
             && year === new Date().getFullYear()
             ? "today"
             : "";
-        lit.push([(months[month] + i), "active", (i), isToday]);
+        lit.push([(months[month] + " " + String(i) + " " + year), "active", (i), isToday]);
     }
 
     // Loop to add the first dates of the next month
@@ -57,7 +57,7 @@ export default function creation(date) {
         else {
             temp = month + 1;
         }
-        lit.push([(months[temp] + (i - dayend + 1)), "inactive", (i - dayend + 1), ""]);
+        lit.push([(months[temp] + " " + String(i - dayend + 1) + " " + year), "inactive", (i - dayend + 1), ""]);
     }
 
     return lit;
