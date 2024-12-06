@@ -94,6 +94,7 @@ export default function App() {
     const openPopup = (e, data) => {
         popupIsEnabled(!popupEnabled);
         setCurrentData(data);
+        setCurrentTask(data[4])
     }
 
 
