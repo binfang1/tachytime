@@ -1,10 +1,11 @@
-
+import {useState} from "react"
 
 export default function creation(date) {
     const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
     let year = date.getFullYear();
     let month = date.getMonth();
     let today = new Date;
+    const [tasks, setTasks] = useState([]);
 
 
     // Get the first day of the month
@@ -32,7 +33,7 @@ export default function creation(date) {
             temp = month - 1;
         }
         console.log(temp)
-        lit.push([(months[temp] + " " + String(monthlastdate - i + 1) + " " + year), "inactive", (monthlastdate - i + 1), ""]);
+        lit.push([(months[temp] + " " + String(monthlastdate - i + 1) + " " + year), "inactive", (monthlastdate - i + 1), "", tasks, setTasks]);
     }
 
     // Loop to add the dates of the current month
@@ -45,7 +46,7 @@ export default function creation(date) {
             && year === new Date().getFullYear()
             ? "today"
             : "";
-        lit.push([(months[month] + " " + String(i) + " " + year), "active", (i), isToday]);
+        lit.push([(months[month] + " " + String(i) + " " + year), "active", (i), isToday, tasks, setTasks]);
     }
 
     // Loop to add the first dates of the next month
@@ -57,7 +58,7 @@ export default function creation(date) {
         else {
             temp = month + 1;
         }
-        lit.push([(months[temp] + " " + String(i - dayend + 1) + " " + year), "inactive", (i - dayend + 1), ""]);
+        lit.push([(months[temp] + " " + String(i - dayend + 1) + " " + year), "inactive", (i - dayend + 1), "", tasks, setTasks]);
     }
 
     return lit;

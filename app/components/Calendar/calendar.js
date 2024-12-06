@@ -1,6 +1,7 @@
 "use client";
-import {useState, useEffect, Grid, Item} from "react";
+import React, {useState, useEffect} from "react";
 import creation from "./createCalendar";
+import Popup from "./popup";
 
 
 export default function App() {
@@ -9,6 +10,9 @@ export default function App() {
     const today = new Date;
 
     const [date, setDate] = useState(new Date);
+    const [popupEnabled, popupIsEnabled] = useState(false);
+
+
 
 
     function getDate(today) {
@@ -27,7 +31,6 @@ export default function App() {
         setDate(new Date(date.getFullYear(), date.getMonth()+2, 0));
     }
 
-
     const layout = (date) => {
         return creation(date);;
     }
@@ -41,6 +44,10 @@ export default function App() {
     }
 
 
+
+    const openPopup = (e, data) => {
+        console.log(data[4]);
+    }
 
 
 
@@ -63,21 +70,24 @@ export default function App() {
                 {layout(date).map(data => (
                     <li key = {data[0]}>
                     {data[1] === "inactive" ? (
-                        <div className = "box-border h-48 w-48 border-2 border-gray-500 text-center cursor-pointer hover:bg-blue-700">
+                        <div className = "box-border h-48 w-48 border-2 border-gray-500 text-center hover:cursor-pointer hover:bg-blue-700" onClick={(e) => openPopup(e, data)}>
                             <p className = "text-left ml-1 mt-1">{data[2]}</p>
                         </div>
                     ) :
 
                     (data[3] === "today" ? (
-                        <div className = "box-border h-48 w-48 border-2 border-white text-center bg-blue-500 cursor-pointer hover:bg-blue-700">
+                        <div className = "box-border h-48 w-48 border-2 border-white text-center bg-blue-500 hover:cursor-pointer hover:bg-blue-700" onClick={(e) => openPopup(e, data)}>
                             <p className = "text-left ml-1 mt-1">{data[2]}</p>
+      
                         </div>
                     ) : 
                     
                     (
-                        <div className = "box-border h-48 w-48 border-2 border-white text-center cursor-pointer hover:bg-blue-700">
+                        <div className = "box-border h-48 w-48 border-2 border-white text-center hover:cursor-pointer hover:bg-blue-700" onClick={(e) => openPopup(e, data)}>
                             <p className = "text-left ml-1 mt-1">{data[2]}</p>
+    
                         </div>
+                        
                     )
                     )}
                     </li>
