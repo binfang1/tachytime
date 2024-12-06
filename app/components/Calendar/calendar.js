@@ -7,12 +7,13 @@ import Popup from "./popup";
 export default function App() {
     const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const [tasks, setTasks] = useState([]);
     const today = new Date;
 
+
     const [date, setDate] = useState(new Date);
-    const [popupEnabled, popupIsEnabled] = useState(false);
-
-
+    
+    const [day, setDay] = useState(creation(date, tasks, setTasks));
 
 
     function getDate(today) {
@@ -29,11 +30,14 @@ export default function App() {
 
     const increaseDate = () => {
         setDate(new Date(date.getFullYear(), date.getMonth()+2, 0));
+
     }
 
-    const layout = (date) => {
-        return creation(date);;
-    }
+    useEffect(() => {
+        setDay(creation(date, tasks, setTasks))
+     }, [date])
+
+
 
     const getMonthYear = (date) => {
         return months[date.getMonth()] + ", " + date.getFullYear()
@@ -43,11 +47,10 @@ export default function App() {
         setDate(new Date())
     }
 
-
-
     const openPopup = (e, data) => {
+        data[6].push(["meme"])
         data[5]([...data[4], ['meme']]);
-        console.log(data[4]);
+        console.log(data[1] + data[4]);
     }
 
 
@@ -68,25 +71,50 @@ export default function App() {
                 <li className = "">Thursday</li>
                 <li className = "">Friday</li>
                 <li className = "">Saturday</li>
-                {layout(date).map(data => (
+                {day.map(data => (
                     <li key = {data[0]}>
                     {data[1] === "inactive" ? (
                         <div className = "box-border h-48 w-48 border-2 border-gray-500 text-center hover:cursor-pointer hover:bg-blue-700" onClick={(e) => openPopup(e, data, data[5])}>
                             <p className = "text-left ml-1 mt-1">{data[2]}</p>
+                            {data[4] ? (
+                                <ul>
+                                    {data[6].map(tasks => (
+                                        <li>{tasks}</li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                <div></div>
+                            )}
                         </div>
                     ) :
 
                     (data[3] === "today" ? (
                         <div className = "box-border h-48 w-48 border-2 border-white text-center bg-blue-500 hover:cursor-pointer hover:bg-blue-700" onClick={(e) => openPopup(e, data, data[5])}>
                             <p className = "text-left ml-1 mt-1">{data[2]}</p>
-      
+                            {data[4] ? (
+                                <ul>
+                                    {data[6].map(tasks => (
+                                        <li>{tasks}</li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                <div></div>
+                            )}
                         </div>
                     ) : 
                     
                     (
                         <div className = "box-border h-48 w-48 border-2 border-white text-center hover:cursor-pointer hover:bg-blue-700" onClick={(e) => openPopup(e, data, data[5])}>
                             <p className = "text-left ml-1 mt-1">{data[2]}</p>
-    
+                            {data[4] ? (
+                                <ul>
+                                    {data[6].map(tasks => (
+                                        <li>{tasks}</li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                <div></div>
+                            )}
                         </div>
                         
                     )
