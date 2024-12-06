@@ -32,7 +32,6 @@ export default function creation(date, tasks, setTasks) {
         else {
             temp = month - 1;
         }
-        console.log(temp)
         lit.push([(months[temp] + " " + String(monthlastdate - i + 1) + " " + year), "inactive", (monthlastdate - i + 1), "", tasks, setTasks, []]);
     }
 
