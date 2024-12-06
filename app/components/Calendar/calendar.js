@@ -46,6 +46,7 @@ export default function App() {
 
 
     const openPopup = (e, data) => {
+        data[5]([...data[4], ['meme']]);
         console.log(data[4]);
     }
 
@@ -70,20 +71,20 @@ export default function App() {
                 {layout(date).map(data => (
                     <li key = {data[0]}>
                     {data[1] === "inactive" ? (
-                        <div className = "box-border h-48 w-48 border-2 border-gray-500 text-center hover:cursor-pointer hover:bg-blue-700" onClick={(e) => openPopup(e, data)}>
+                        <div className = "box-border h-48 w-48 border-2 border-gray-500 text-center hover:cursor-pointer hover:bg-blue-700" onClick={(e) => openPopup(e, data, data[5])}>
                             <p className = "text-left ml-1 mt-1">{data[2]}</p>
                         </div>
                     ) :
 
                     (data[3] === "today" ? (
-                        <div className = "box-border h-48 w-48 border-2 border-white text-center bg-blue-500 hover:cursor-pointer hover:bg-blue-700" onClick={(e) => openPopup(e, data)}>
+                        <div className = "box-border h-48 w-48 border-2 border-white text-center bg-blue-500 hover:cursor-pointer hover:bg-blue-700" onClick={(e) => openPopup(e, data, data[5])}>
                             <p className = "text-left ml-1 mt-1">{data[2]}</p>
       
                         </div>
                     ) : 
                     
                     (
-                        <div className = "box-border h-48 w-48 border-2 border-white text-center hover:cursor-pointer hover:bg-blue-700" onClick={(e) => openPopup(e, data)}>
+                        <div className = "box-border h-48 w-48 border-2 border-white text-center hover:cursor-pointer hover:bg-blue-700" onClick={(e) => openPopup(e, data, data[5])}>
                             <p className = "text-left ml-1 mt-1">{data[2]}</p>
     
                         </div>
