@@ -26,6 +26,18 @@ export default function App() {
         return days[day] + " " + realmonth + "/" + date + "/" + realyear;
     }
 
+    function makeid(length) {
+        let result = '';
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        const charactersLength = characters.length;
+        let counter = 0;
+        while (counter < length) {
+          result += characters.charAt(Math.floor(Math.random() * charactersLength));
+          counter += 1;
+        }
+        return result;
+    }
+
     const decreaseDate = () => {
         setDate(new Date(date.getFullYear(), date.getMonth(), 0));
     }
@@ -83,7 +95,7 @@ export default function App() {
                                     {data[4] ? (
                                         <ul>
                                             {data[6].map(tasks => (
-                                                <li>{tasks}</li>
+                                                <li key = {makeid(8)}>{tasks}</li>
                                             ))}
                                         </ul>
                                     ) : (
@@ -98,7 +110,7 @@ export default function App() {
                                     {data[4] ? (
                                         <ul>
                                             {data[6].map(tasks => (
-                                                <li>{tasks}</li>
+                                                <li key = {makeid(8)}>{tasks}</li>
                                             ))}
                                         </ul>
                                     ) : (
@@ -113,7 +125,7 @@ export default function App() {
                                     {data[4] ? (
                                         <ul>
                                             {data[6].map(tasks => (
-                                                <li>{tasks}</li>
+                                                <li key = {makeid(8)}>{tasks}</li>
                                             ))}
                                         </ul>
                                     ) : (
