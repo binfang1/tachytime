@@ -6,7 +6,6 @@ import creation from "./createCalendar";
 export default function App() {
     const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-    const [tasks, setTasks] = useState([]);
     const today = new Date;
 
 
@@ -62,7 +61,7 @@ export default function App() {
     }
 
     useEffect(() => {
-        setDay(creation(date, tasks, setTasks))
+        setDay(creation(date))
      }, [date])
 
     useEffect(() => {
