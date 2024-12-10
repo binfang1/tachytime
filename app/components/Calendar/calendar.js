@@ -117,9 +117,20 @@ export default function App() {
                                     <p className = "text-left ml-1 mt-1">{data[2]}</p>
                                     {data[4] ? (
                                         <ul className = "text-left ml-3 mt-1 mr-3">
-                                            {data[4].map(tasks => (
-                                                <li className = "border rounded-full pl-2 mb-3" key = {makeid(8)}>{tasks}</li>
-                                            ))}
+                                            {data[4].length > 3 ? (
+                                                data[4].slice(0, 2).map(tasks => (
+                                                    <li className = "bg-blue-500 border-black dark:border-white dark:border-white text-white border rounded-full pl-2 mb-3" key = {makeid(8)}>{tasks}</li>
+                                                ))
+                                            ) : (
+                                                data[4].slice(0, 3).map(tasks => (
+                                                    <li className = "bg-blue-500 border-black dark:border-white dark:border-white text-white border rounded-full pl-2 mb-3" key = {makeid(8)}>{tasks}</li>
+                                                ))
+                                            )}
+                                            {data[4].length > 3 ? (
+                                                <li className = "bg-blue-500 border-black dark:border-white dark:border-white text-white border rounded-full pl-2 mb-3">Click for more...</li>
+                                            ) : (
+                                                <div></div>
+                                            )}
                                         </ul>
                                     ) : (
                                         <div></div>
@@ -132,9 +143,20 @@ export default function App() {
                                     <p className = "text-left ml-1 mt-1">{data[2]}</p>
                                     {data[4] ? (
                                         <ul className = "text-left ml-3 mt-1 mr-3">
-                                            {data[4].map(tasks => (
-                                                <li className = "border rounded-full pl-2 mb-3" key = {makeid(8)}>{tasks}</li>
-                                            ))}
+                                            {data[4].length > 3 ? (
+                                                data[4].slice(0, 2).map(tasks => (
+                                                    <li className = "bg-blue-500 border-black dark:border-white dark:border-white text-white border rounded-full pl-2 mb-3" key = {makeid(8)}>{tasks}</li>
+                                                ))
+                                            ) : (
+                                                data[4].slice(0, 3).map(tasks => (
+                                                    <li className = "bg-blue-500 border-black dark:border-white dark:border-white text-white border rounded-full pl-2 mb-3" key = {makeid(8)}>{tasks}</li>
+                                                ))
+                                            )}
+                                            {data[4].length > 3 ? (
+                                                <li className = "bg-blue-500 border-black dark:border-white dark:border-white text-white border rounded-full pl-2 mb-3">Click for more...</li>
+                                            ) : (
+                                                <div></div>
+                                            )}
                                         </ul>
                                     ) : (
                                         <div></div>
@@ -147,9 +169,20 @@ export default function App() {
                                     <p className = "text-left ml-1 mt-1">{data[2]}</p>
                                     {data[4] ? (
                                         <ul className = "text-left ml-3 mt-1 mr-3">
-                                            {data[4].map(tasks => (
-                                                <li className = "bg-blue-500 border-black dark:border-white dark:border-white text-white border rounded-full pl-2 mb-3" key = {makeid(8)}>{tasks}</li>
-                                            ))}
+                                            {data[4].length > 3 ? (
+                                                data[4].slice(0, 2).map(tasks => (
+                                                    <li className = "bg-blue-500 border-black dark:border-white dark:border-white text-white border rounded-full pl-2 mb-3" key = {makeid(8)}>{tasks}</li>
+                                                ))
+                                            ) : (
+                                                data[4].slice(0, 3).map(tasks => (
+                                                    <li className = "bg-blue-500 border-black dark:border-white dark:border-white text-white border rounded-full pl-2 mb-3" key = {makeid(8)}>{tasks}</li>
+                                                ))
+                                            )}
+                                            {data[4].length > 3 ? (
+                                                <li className = "bg-blue-500 border-black dark:border-white dark:border-white text-white border rounded-full pl-2 mb-3">Click for more...</li>
+                                            ) : (
+                                                <div></div>
+                                            )}
                                         </ul>
                                     ) : (
                                         <div></div>
