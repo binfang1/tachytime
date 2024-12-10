@@ -126,13 +126,9 @@ export default function App() {
                         <button type = "button" className = "w-16 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400  disabled:bg-gray-400 focus:ring-opacity-75 ml-1" onClick = {increaseDate}>→</button>
                     </div>
                     <ul className = "grid grid-cols-7 w-[1225px] mt-4 mb-12 m-auto justify-items-center">
-                        <li className = "mb-4">Sunday</li>
-                        <li className = "dark:text-white text-black">Monday</li>
-                        <li className = "dark:text-white text-black">Tuesday</li>
-                        <li className = "dark:text-white text-black">Wednsday</li>
-                        <li className = "dark:text-white text-black">Thursday</li>
-                        <li className = "dark:text-white text-black">Friday</li>
-                        <li className = "dark:text-white text-black">Saturday</li>
+                        {days.map(weekday => (
+                            <li key = {weekday} className = "mb-4 dark:text-white text-black">{weekday}</li>
+                        ))}
                         {day.map(data => (
                             <li key = {data[0]}>
                             {data[1] === "inactive" ? (
