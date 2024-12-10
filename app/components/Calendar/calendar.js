@@ -102,7 +102,7 @@ export default function App() {
                         <button type = "button" className = "w-48 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 disabled:bg-gray-400 focus:ring-blue-400 focus:ring-opacity-75" onClick = {getCurrentDay}>Todays Date:<br/>{today.toDateString()}</button>
                         <button type = "button" className = "w-16 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400  disabled:bg-gray-400 focus:ring-opacity-75 ml-1" onClick = {increaseDate}>→</button>
                     </div>
-                    <ul className = "grid grid-cols-7 w-[1000px] mt-4 mb-12 m-auto justify-items-center">
+                    <ul className = "grid grid-cols-7 w-[1225px] mt-4 mb-12 m-auto justify-items-center">
                         <li className = "mb-4">Sunday</li>
                         <li className = "">Monday</li>
                         <li className = "">Tuesday</li>
@@ -113,7 +113,7 @@ export default function App() {
                         {day.map(data => (
                             <li key = {data[0]}>
                             {data[1] === "inactive" ? (
-                                <div className = "box-border h-48 w-48 border-2 border-gray-500 text-center hover:cursor-pointer hover:bg-blue-700" onClick={(e) => openPopup(e, data, data[5])}>
+                                <div className = "box-border h-[175px] w-[175px] border-2 border-gray-500 text-center hover:cursor-pointer hover:bg-blue-700" onClick={(e) => openPopup(e, data, data[5])}>
                                     <p className = "text-left ml-1 mt-1">{data[2]}</p>
                                     {data[4] ? (
                                         <ul>
@@ -128,7 +128,7 @@ export default function App() {
                             ) :
 
                             (data[3] === "today" ? (
-                                <div className = "box-border h-48 w-48 border-2 border-white text-center bg-blue-500 hover:cursor-pointer hover:bg-blue-700" onClick={(e) => openPopup(e, data, data[5])}>
+                                <div className = "box-border h-[175px] w-[175px] border-2 border-white text-center bg-blue-500 hover:cursor-pointer hover:bg-blue-700" onClick={(e) => openPopup(e, data, data[5])}>
                                     <p className = "text-left ml-1 mt-1">{data[2]}</p>
                                     {data[4] ? (
                                         <ul>
@@ -143,7 +143,7 @@ export default function App() {
                             ) : 
                             
                             (
-                                <div className = "box-border h-48 w-48 border-2 border-white text-center hover:cursor-pointer hover:bg-blue-700" onClick={(e) => openPopup(e, data, data[5])}>
+                                <div className = "box-border h-[175px] w-[175px] border-2 border-white text-center hover:cursor-pointer hover:bg-blue-700" onClick={(e) => openPopup(e, data, data[5])}>
                                     <p className = "text-left ml-1 mt-1">{data[2]}</p>
                                     {data[4] ? (
                                         <ul>
