@@ -15,6 +15,7 @@ export default function App() {
     const [popupEnabled, popupIsEnabled] = useState(false);
     const [currentData, setCurrentData] = useState([]);
     const [currentTask, setCurrentTask] = useState([]);
+    const [task, setTask] = useState("");
 
     function makeid(length) {
         let result = '';
@@ -30,25 +31,48 @@ export default function App() {
 
     function Popup() {
         return (popupEnabled) ? (
-            <main onClick = {() => popupIsEnabled(false)} className = "absolute bottom-0 top-0 left-0 flex justify-center items-center w-full h-[130%]  bg-slate-950/50">
-                <div className ="flex flex-col absolute top-[350px] p-8 max-w-[800px] w-full max-h-[750px] h-full bg-white">
+            <main className = "absolute bottom-0 top-0 left-0 flex justify-center items-center w-full h-[130%]  bg-slate-950/50">
+                <div className ="flex flex-col absolute top-[350px] p-12 max-w-[800px] w-full max-h-[750px] h-full bg-white">
                     <div className="flex justify-end">
-                        <button className="text-black" onClick = {() => popupIsEnabled(false)}>X</button>
+                        <button className="text-black text-3xl w-10 h-10" onClick = {() => popupIsEnabled(false)}>X</button>
                     </div>
                     <h1 className="text-black text-2xl mb-4">{currentData[0]}</h1>
                     {currentTask ? (
-                            <ul>
+                            <ul className="overflow-y-scroll scroll-smooth mb-2">
                                 {currentTask.map(tasks => (
-                                    <li className="text-black" key = {makeid(8)}>{tasks}</li>
+                                    <div className="flex items-center mb-4">
+                                        <li className="bg-blue-500 border-2 text-white font-semibold rounded-full shadow-md max-w-fit break-all pt-2 pb-2 pl-8 pr-8" key = {makeid(8)}>{tasks}</li>
+                                        <p className="opacity-50 text-black hover:opacity-100 hover:text-red-400 pr-4 pl-2 hover:cursor-pointer" onClick={() => deleteTask(tasks)}>🗑️</p>
+                                    </div>
                                 ))}
                             </ul>
                         ) : (
                             <div></div>
                         )}
-                    <button className="bg-blue-500 text-white font-semibold rounded-lg shadow-md mt-auto" onClick = {() => (setCurrentTask([...currentTask, ["meme"]]))}>meme</button>
+                    <form onSubmit={() => addTask(task)} className="mt-auto flex">
+                        <input className = "border-gray-500 border-2 rounded-lg w-full h-12 pl-4 pr-4 text-black" autoFocus required type = "text" placeholder = "Add Task" value={task} onChange={handleChange}></input>
+                        <input className="bg-blue-500 text-white font-semibold rounded-lg shadow-md w-32 h-12 ml-4" type = "submit" value = "Add Task"/>
+                    </form>
                 </div>
             </main>
         ) : "";
+    }
+
+
+    const handleChange = (event) => {
+        event.preventDefault();
+        setTask(event.target.value);
+    };
+
+    const addTask = () => {
+        (setCurrentTask([...currentTask, [task]]));
+        setTask("");
+        //Add function to add to the cloud base
+    }
+
+    const deleteTask = (itemTask) => {
+        setCurrentTask([...currentTask.filter(item => item != itemTask)]);
+        //Add function to delete from cloud base
     }
 
     const decreaseDate = () => {
@@ -57,10 +81,10 @@ export default function App() {
 
     const increaseDate = () => {
         setDate(new Date(date.getFullYear(), date.getMonth()+2, 0));
-
     }
 
     useEffect(() => {
+        document.title = 'TachyTime';
         setDay(creation(date))
      }, [date])
 
@@ -69,7 +93,6 @@ export default function App() {
     }, [currentData])
 
     useEffect(() => {
-        document.title = 'TachyTime';
         setCurrentTask(currentTask);
         currentData[4] = currentTask;
     }, [currentTask])
@@ -119,15 +142,15 @@ export default function App() {
                                         <ul className = "text-left ml-3 mt-1 mr-3">
                                             {data[4].length > 3 ? (
                                                 data[4].slice(0, 2).map(tasks => (
-                                                    <li className = "bg-blue-500 border-black dark:border-white dark:border-white text-white border rounded-full pl-2 mb-3" key = {makeid(8)}>{tasks}</li>
+                                                    <li className = "truncate bg-blue-500 border-black dark:border-white dark:border-white text-white border rounded-full pl-2 mb-3" key = {makeid(8)}>{tasks}</li>
                                                 ))
                                             ) : (
                                                 data[4].slice(0, 3).map(tasks => (
-                                                    <li className = "bg-blue-500 border-black dark:border-white dark:border-white text-white border rounded-full pl-2 mb-3" key = {makeid(8)}>{tasks}</li>
+                                                    <li className = "truncate bg-blue-500 border-black dark:border-white dark:border-white text-white border rounded-full pl-2 mb-3" key = {makeid(8)}>{tasks}</li>
                                                 ))
                                             )}
                                             {data[4].length > 3 ? (
-                                                <li className = "bg-blue-500 border-black dark:border-white dark:border-white text-white border rounded-full pl-2 mb-3">Click for more...</li>
+                                                <li className = "truncate bg-blue-500 border-black dark:border-white dark:border-white text-white border rounded-full pl-2 mb-3">Click for more...</li>
                                             ) : (
                                                 <div></div>
                                             )}
@@ -145,15 +168,15 @@ export default function App() {
                                         <ul className = "text-left ml-3 mt-1 mr-3">
                                             {data[4].length > 3 ? (
                                                 data[4].slice(0, 2).map(tasks => (
-                                                    <li className = "bg-blue-500 border-black dark:border-white dark:border-white text-white border rounded-full pl-2 mb-3" key = {makeid(8)}>{tasks}</li>
+                                                    <li className = "truncate bg-blue-500 border-black dark:border-white dark:border-white text-white border rounded-full pl-2 mb-3" key = {makeid(8)}>{tasks}</li>
                                                 ))
                                             ) : (
                                                 data[4].slice(0, 3).map(tasks => (
-                                                    <li className = "bg-blue-500 border-black dark:border-white dark:border-white text-white border rounded-full pl-2 mb-3" key = {makeid(8)}>{tasks}</li>
+                                                    <li className = "truncate bg-blue-500 border-black dark:border-white dark:border-white text-white border rounded-full pl-2 mb-3" key = {makeid(8)}>{tasks}</li>
                                                 ))
                                             )}
                                             {data[4].length > 3 ? (
-                                                <li className = "bg-blue-500 border-black dark:border-white dark:border-white text-white border rounded-full pl-2 mb-3">Click for more...</li>
+                                                <li className = "truncate bg-blue-500 border-black dark:border-white dark:border-white text-white border rounded-full pl-2 mb-3">Click for more...</li>
                                             ) : (
                                                 <div></div>
                                             )}
@@ -171,15 +194,15 @@ export default function App() {
                                         <ul className = "text-left ml-3 mt-1 mr-3">
                                             {data[4].length > 3 ? (
                                                 data[4].slice(0, 2).map(tasks => (
-                                                    <li className = "bg-blue-500 border-black dark:border-white dark:border-white text-white border rounded-full pl-2 mb-3" key = {makeid(8)}>{tasks}</li>
+                                                    <li className = "truncate bg-blue-500 border-black dark:border-white dark:border-white text-white border rounded-full pl-2 mb-3" key = {makeid(8)}>{tasks}</li>
                                                 ))
                                             ) : (
                                                 data[4].slice(0, 3).map(tasks => (
-                                                    <li className = "bg-blue-500 border-black dark:border-white dark:border-white text-white border rounded-full pl-2 mb-3" key = {makeid(8)}>{tasks}</li>
+                                                    <li className = "truncate bg-blue-500 border-black dark:border-white dark:border-white text-white border rounded-full pl-2 mb-3" key = {makeid(8)}>{tasks}</li>
                                                 ))
                                             )}
                                             {data[4].length > 3 ? (
-                                                <li className = "bg-blue-500 border-black dark:border-white dark:border-white text-white border rounded-full pl-2 mb-3">Click for more...</li>
+                                                <li className = "truncate bg-blue-500 border-black dark:border-white dark:border-white text-white border rounded-full pl-2 mb-3">Click for more...</li>
                                             ) : (
                                                 <div></div>
                                             )}
