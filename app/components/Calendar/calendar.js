@@ -31,7 +31,7 @@ export default function App() {
     function Popup() {
         return (popupEnabled) ? (
             <main className = "absolute top-0 left-0 flex justify-center items-center w-full h-[150%]  bg-slate-950/50">
-                <div className ="flex flex-col absolute top-[200px] p-8 max-w-[800px] w-full max-h-[750px] h-full bg-white">
+                <div className ="flex flex-col absolute top-[350px] p-8 max-w-[800px] w-full max-h-[750px] h-full bg-white">
                     <div className="flex justify-end">
                         <button className="text-black" onClick = {() => popupIsEnabled(false)}>X</button>
                     </div>
