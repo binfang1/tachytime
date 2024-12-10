@@ -91,12 +91,12 @@ export default function App() {
 
     return (
         <main>
-            <h1 className="text-5xl mt-4 ml-4">TachyTime</h1>
+            <h1 className="text-5xl mt-4 ml-4 dark:text-white text-black">TachyTime</h1>
             {change ? (
                 <div>
-                    <p className="text-2xl hover:cursor-pointer hover:underline mt-4 ml-4" onClick={() => setChange(!change)}>Sign Out</p>
+                    <p className="text-2xl hover:cursor-pointer hover:underline mt-4 ml-4 dark:text-white text-black" onClick={() => setChange(!change)}>Sign Out</p>
              
-                    <h1 className = "text-center text-4xl mt-4">{getMonthYear(date)}</h1>
+                    <h1 className = "text-center text-4xl mt-4 dark:text-white text-black">{getMonthYear(date)}</h1>
                     <div className = "flex gap-4 justify-center mt-4">
                         <button type = "button" className = "w-16 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 disabled:bg-gray-400 focus:ring-blue-400 focus:ring-opacity-75" onClick = {decreaseDate}>←</button>
                         <button type = "button" className = "w-48 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 disabled:bg-gray-400 focus:ring-blue-400 focus:ring-opacity-75" onClick = {getCurrentDay}>Todays Date:<br/>{today.toDateString()}</button>
@@ -104,21 +104,21 @@ export default function App() {
                     </div>
                     <ul className = "grid grid-cols-7 w-[1225px] mt-4 mb-12 m-auto justify-items-center">
                         <li className = "mb-4">Sunday</li>
-                        <li className = "">Monday</li>
-                        <li className = "">Tuesday</li>
-                        <li className = "">Wednsday</li>
-                        <li className = "">Thursday</li>
-                        <li className = "">Friday</li>
-                        <li className = "">Saturday</li>
+                        <li className = "dark:text-white text-black">Monday</li>
+                        <li className = "dark:text-white text-black">Tuesday</li>
+                        <li className = "dark:text-white text-black">Wednsday</li>
+                        <li className = "dark:text-white text-black">Thursday</li>
+                        <li className = "dark:text-white text-black">Friday</li>
+                        <li className = "dark:text-white text-black">Saturday</li>
                         {day.map(data => (
                             <li key = {data[0]}>
                             {data[1] === "inactive" ? (
-                                <div className = "box-border h-[175px] w-[175px] border-2 border-gray-500 text-center hover:cursor-pointer hover:bg-blue-700" onClick={(e) => openPopup(e, data, data[5])}>
+                                <div className = "dark:text-gray-500 text-gray-400 box-border h-[175px] w-[175px] border-[2px] dark:border-gray-500 border-gray-400 text-center hover:cursor-pointer hover:bg-blue-700 hover:text-white" onClick={(e) => openPopup(e, data, data[5])}>
                                     <p className = "text-left ml-1 mt-1">{data[2]}</p>
                                     {data[4] ? (
-                                        <ul>
+                                        <ul className = "text-left ml-3 mt-1 mr-3">
                                             {data[4].map(tasks => (
-                                                <li key = {makeid(8)}>{tasks}</li>
+                                                <li className = "border rounded-full pl-2 mb-3" key = {makeid(8)}>{tasks}</li>
                                             ))}
                                         </ul>
                                     ) : (
@@ -128,12 +128,12 @@ export default function App() {
                             ) :
 
                             (data[3] === "today" ? (
-                                <div className = "box-border h-[175px] w-[175px] border-2 border-white text-center bg-blue-500 hover:cursor-pointer hover:bg-blue-700" onClick={(e) => openPopup(e, data, data[5])}>
+                                <div className = "dark:text-white text-black box-border h-[175px] w-[175px] border-[2px] dark:border-white border-black text-center bg-blue-500 hover:cursor-pointer hover:bg-blue-700 hover:text-white" onClick={(e) => openPopup(e, data, data[5])}>
                                     <p className = "text-left ml-1 mt-1">{data[2]}</p>
                                     {data[4] ? (
-                                        <ul>
+                                        <ul className = "text-left ml-3 mt-1 mr-3">
                                             {data[4].map(tasks => (
-                                                <li key = {makeid(8)}>{tasks}</li>
+                                                <li className = "border rounded-full pl-2 mb-3" key = {makeid(8)}>{tasks}</li>
                                             ))}
                                         </ul>
                                     ) : (
@@ -143,12 +143,12 @@ export default function App() {
                             ) : 
                             
                             (
-                                <div className = "box-border h-[175px] w-[175px] border-2 border-white text-center hover:cursor-pointer hover:bg-blue-700" onClick={(e) => openPopup(e, data, data[5])}>
+                                <div className = "dark:text-white text-black box-border h-[175px] w-[175px] border-[2px] dark:border-white border-black text-center hover:cursor-pointer hover:bg-blue-700 hover:text-white" onClick={(e) => openPopup(e, data, data[5])}>
                                     <p className = "text-left ml-1 mt-1">{data[2]}</p>
                                     {data[4] ? (
-                                        <ul>
+                                        <ul className = "text-left ml-3 mt-1 mr-3">
                                             {data[4].map(tasks => (
-                                                <li key = {makeid(8)}>{tasks}</li>
+                                                <li className = "bg-blue-500 border-black dark:border-white dark:border-white text-white border rounded-full pl-2 mb-3" key = {makeid(8)}>{tasks}</li>
                                             ))}
                                         </ul>
                                     ) : (
