@@ -3,7 +3,7 @@
 import { getItems} from "../../_services/calendar-services.js";
 
 export default function creation(date, user) {
-
+    console.log(user);
     async function getTasks(taskDate) {
         let items = await getItems(user.email, taskDate);
         console.log(items);
