@@ -13,7 +13,7 @@ export default function App() {
     const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
 
     const [date, setDate] = useState(new Date);
-    const [day, setDay] = useState(creation(date));
+    const [day, setDay] = useState(creation(date, user));
     const [change, setChange] = useState(false);
     const [popupEnabled, popupIsEnabled] = useState(false);
     const [currentData, setCurrentData] = useState([]);
@@ -105,7 +105,7 @@ export default function App() {
 
     useEffect(() => {
         document.title = 'TachyTime';
-        setDay(creation(date))
+        setDay(creation(date, user))
      }, [date])
 
     useEffect(() => {

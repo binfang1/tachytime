@@ -1,10 +1,9 @@
 
-import { useUserAuth } from "../../_utils/auth-context.js";
+
 import { getItems} from "../../_services/calendar-services.js";
 
 
-export default function creation(date) {
-    const {user} = useUserAuth();
+export default function creation(date, user) {
 
     async function getTasks(taskDate) {
         let items = await getItems(user.email, taskDate);
