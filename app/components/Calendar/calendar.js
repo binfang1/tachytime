@@ -1,6 +1,8 @@
 "use client";
 import React, {useState, useEffect} from "react";
 import creation from "./createCalendar";
+import { useUserAuth } from "../../_utils/auth-context.js";
+import { addItem, getItems, deleteItem } from "../../_services/calendar-services.js";
 
 
 export default function App() {
@@ -8,6 +10,7 @@ export default function App() {
     const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
     const today = new Date;
 
+    const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
 
     const [date, setDate] = useState(new Date);
     const [day, setDay] = useState(creation(date));
@@ -49,7 +52,7 @@ export default function App() {
                         ) : (
                             <div></div>
                         )}
-                    <form onSubmit={() => addTask(task)} className="mt-auto flex">
+                    <form onSubmit={() => addTask()} className="mt-auto flex">
                         <input className = "border-gray-500 border-2 rounded-lg w-full h-12 pl-4 pr-4 text-black" autoFocus required type = "text" placeholder = "Add Task" value={task} onChange={handleChange}></input>
                         <input className="bg-blue-500 text-white font-semibold rounded-lg shadow-md w-32 h-12 ml-4" type = "submit" value = "Add Task"/>
                     </form>
@@ -66,13 +69,30 @@ export default function App() {
 
     const addTask = () => {
         (setCurrentTask([...currentTask, [task]]));
+        console.log("currentTask in addTask:")
+        console.log(currentTask);
+        addItem(user.email, task, currentData[0]);
+
         setTask("");
         //Add function to add to the cloud base
+
+        getTasks(currentData[0]);
+    }
+
+    async function getTasks(date) {
+        let items = await getItems(user.email, date);
+
+        console.log("currentTask in getTasks:")
+        console.log(currentTask);
+        setCurrentTask(items);
     }
 
     const deleteTask = (itemTask) => {
         setCurrentTask([...currentTask.filter(item => item != itemTask)]);
         //Add function to delete from cloud base
+
+        deleteItem(user.email, currentData[0], itemTask);
+
     }
 
     const decreaseDate = () => {
@@ -109,7 +129,18 @@ export default function App() {
     const openPopup = (e, data) => {
         popupIsEnabled(!popupEnabled);
         setCurrentData(data);
-        setCurrentTask(data[4])
+        console.log(data[4]);
+        setCurrentTask(data[4]);
+    }
+
+    const signIn = async () => {
+        await gitHubSignIn();
+        setChange(true);
+    }
+
+    const signOut = async () => {
+        await firebaseSignOut();
+        setChange(false);
     }
 
     return (
@@ -117,7 +148,7 @@ export default function App() {
             <h1 className="text-5xl mt-4 ml-4 dark:text-white text-black">TachyTime</h1>
             {change ? (
                 <div>
-                    <p className="text-2xl hover:cursor-pointer hover:underline mt-4 ml-4 dark:text-white text-black" onClick={() => setChange(!change)}>Sign Out</p>
+                    <p className="text-2xl hover:cursor-pointer hover:underline mt-4 ml-4 dark:text-white text-black" onClick={signOut}>Sign Out</p>
              
                     <h1 className = "text-center text-4xl mt-4 dark:text-white text-black">{getMonthYear(date)}</h1>
                     <div className = "flex gap-4 justify-center mt-4">
@@ -217,7 +248,7 @@ export default function App() {
                 </div>
             ) : (
                 //<p className="text-2xl hover:cursor-pointer hover:underline" onClick={() => setChange(!change)}>Sign in</p>
-                <p className="text-2xl hover:cursor-pointer hover:underline mt-4 ml-4" onClick={() => setChange(!change)}>Sign in</p>
+                <p className="text-2xl hover:cursor-pointer hover:underline mt-4 ml-4" onClick={signIn}>Sign in</p>
             )}
             <Popup></Popup>
         </main> 
