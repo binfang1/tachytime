@@ -44,7 +44,7 @@ export default function App() {
                             <ul className="overflow-y-scroll scroll-smooth mb-2">
                                 {currentTask.map(tasks => (
                                     <div className="flex items-center mb-4" key = {makeid(8)}>
-                                        <li className="bg-blue-500 border-2 text-white font-semibold rounded-full shadow-md max-w-fit break-all pt-2 pb-2 pl-8 pr-8" key = {key}>{tasks}</li>
+                                        <li className="bg-blue-500 border-2 text-white font-semibold rounded-full shadow-md max-w-fit break-all pt-2 pb-2 pl-8 pr-8" key = {makeid(8)}>{tasks}</li>
                                         <p className="opacity-50 text-black hover:opacity-100 hover:text-red-400 pr-4 pl-2 hover:cursor-pointer" onClick={() => deleteTask(tasks)}>🗑️</p>
                                     </div>
                                 ))}
