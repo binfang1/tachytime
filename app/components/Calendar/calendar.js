@@ -90,9 +90,7 @@ export default function App() {
     const deleteTask = (itemTask) => {
         setCurrentTask([...currentTask.filter(item => item != itemTask)]);
         //Add function to delete from cloud base
-
         deleteItem(user.email, currentData[0], itemTask);
-
     }
 
     const decreaseDate = () => {
@@ -105,7 +103,10 @@ export default function App() {
 
     useEffect(() => {
         document.title = 'TachyTime';
-        setDay(creation(date, user))
+        if (user)
+        {
+            setDay(creation(date, user))
+        }
      }, [date])
 
     useEffect(() => {
