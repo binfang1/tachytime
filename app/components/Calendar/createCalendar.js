@@ -1,6 +1,17 @@
 
+import { useUserAuth } from "../../_utils/auth-context.js";
+import { getItems} from "../../_services/calendar-services.js";
+
 
 export default function creation(date) {
+    const {user} = useUserAuth();
+
+    async function getTasks(taskDate) {
+        let items = await getItems(user.email, taskDate);
+        console.log(items);
+        return items;
+    }
+
     const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
     let year = date.getFullYear();
     let month = date.getMonth();
@@ -32,12 +43,13 @@ export default function creation(date) {
         else {
             temp = month - 1;
         }
-        lit.push([(months[temp] + " " + String(monthlastdate - i + 1) + " " + year), "inactive", (monthlastdate - i + 1), "", []]);
+        let tasks = getTasks((months[temp] + " " + String(monthlastdate - i + 1) + " " + year));
+        console.log(tasks);
+        lit.push([(months[temp] + " " + String(monthlastdate - i + 1) + " " + year), "inactive", (monthlastdate - i + 1), "", tasks]);
     }
 
     // Loop to add the dates of the current month
     for (let i = 1; i <= lastdate; i++) {
-        
 
         // Check if the current date is today
         let isToday = i === today.getDate()
@@ -45,7 +57,9 @@ export default function creation(date) {
             && year === new Date().getFullYear()
             ? "today"
             : "";
-        lit.push([(months[month] + " " + String(i) + " " + year), "active", (i), isToday, []]);
+        let tasks = getTasks((months[month] + " " + String(i) + " " + year));
+        console.log(tasks);
+        lit.push([(months[month] + " " + String(i) + " " + year), "active", (i), isToday, tasks]);
     }
 
     // Loop to add the first dates of the next month
@@ -57,7 +71,9 @@ export default function creation(date) {
         else {
             temp = month + 1;
         }
-        lit.push([(months[temp] + " " + String(i - dayend + 1) + " " + year), "inactive", (i - dayend + 1), "", []]);
+        let tasks = getTasks((months[temp] + " " + String(i - dayend + 1) + " " + year));
+        console.log(tasks);
+        lit.push([(months[temp] + " " + String(i - dayend + 1) + " " + year), "inactive", (i - dayend + 1), "", tasks]);
     }
 
     return lit;
