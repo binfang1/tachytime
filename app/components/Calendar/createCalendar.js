@@ -2,8 +2,7 @@
 
 import { getItems} from "../../_services/calendar-services.js";
 
-
-export default function creation(date, user) {
+function creation(date, user) {
 
     async function getTasks(taskDate) {
         let items = await getItems(user.email, taskDate);
@@ -42,7 +41,10 @@ export default function creation(date, user) {
         else {
             temp = month - 1;
         }
-        let tasks = getTasks((months[temp] + " " + String(monthlastdate - i + 1) + " " + year));
+        let tasks = []
+        if (user) {
+            getTasks((months[temp] + " " + String(monthlastdate - i + 1) + " " + year));
+        }
         console.log(tasks);
         lit.push([(months[temp] + " " + String(monthlastdate - i + 1) + " " + year), "inactive", (monthlastdate - i + 1), "", tasks]);
     }
@@ -56,7 +58,10 @@ export default function creation(date, user) {
             && year === new Date().getFullYear()
             ? "today"
             : "";
-        let tasks = getTasks((months[month] + " " + String(i) + " " + year));
+        let tasks = [];
+        if (user) {
+            tasks = getTasks((months[month] + " " + String(i) + " " + year));
+        }
         console.log(tasks);
         lit.push([(months[month] + " " + String(i) + " " + year), "active", (i), isToday, tasks]);
     }
@@ -70,8 +75,10 @@ export default function creation(date, user) {
         else {
             temp = month + 1;
         }
-        let tasks = getTasks((months[temp] + " " + String(i - dayend + 1) + " " + year));
-        console.log(tasks);
+        let tasks = []
+        if (user) {
+            getTasks((months[temp] + " " + String(i - dayend + 1) + " " + year));
+        }
         lit.push([(months[temp] + " " + String(i - dayend + 1) + " " + year), "inactive", (i - dayend + 1), "", tasks]);
     }
 
